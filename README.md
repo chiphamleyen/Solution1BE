@@ -1,4 +1,4 @@
-# BE for Chi's solution: Network attack classification
+# BE for Bao's solution: URL classification
 
 # 2 ways to run the project
 ## Using docker
@@ -19,5 +19,5 @@ Run "make start-reload" or "make start"
 
 ## Swagger
 After app run, go to:
-localhost:8080/docs for swagger ui
-localhost:8080/redoc for redoc
+localhost:8000/docs for swagger ui
+localhost:8000/redoc for redoc
