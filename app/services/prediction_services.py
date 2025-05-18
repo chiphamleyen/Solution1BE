@@ -57,4 +57,33 @@ class PredictionService:
         prediction_data = await PredictionService.save_prediction(history_data)
         return prediction_data
     
+    @staticmethod
+    async def get_single_prediction(url: str, user_id: str, role: str):
+        df = pd.DataFrame({'url': [url]})
+        # try:
+        prediction_df = get_prediction(df)
+        # except Exception as e:
+        #     _logger.error(f"Error in prediction: {e}")
+        #     raise ValueError("File format is not correct")
+
+        history_data = []
+        approved_status = ApprovalEnum.Approved if role == UserRoleEnum.ADMIN.value else None
+        for index, row in prediction_df.iterrows():
+            history = History(
+                submitter_id=user_id,
+                submitter_role=role,
+                original_url=row['url'],
+                detection=bool(row['detection']),
+                classifier=ClassifierEnum[row['classifier']],
+                need_review=False,
+                approved=approved_status,
+                approved_at=None,
+                approved_by=None,
+                created_at=datetime.now(),
+                updated_at=datetime.now(),
+            )
+            history_data.append(history)
+
+        prediction_data = await PredictionService.save_prediction(history_data)
+        return prediction_data
     

@@ -16,7 +16,7 @@ async def single_url(
     current_user: str = Depends(get_current_user),
 ):
     user_id, role = current_user
-    prediction_data = await PredictionService.get_prediction(request.url, user_id, role)
+    prediction_data = await PredictionService.get_single_prediction(request.url, user_id, role)
     return HistoryResponseWithoutId(
         data=prediction_data[0],
         message="Success",
