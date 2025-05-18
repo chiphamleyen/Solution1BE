@@ -20,7 +20,7 @@ async def user_report(
     user_id, role = current_user
     report = await ReportService.get_report_data(min_date, max_date, user_id)
     return ReportResponse(
-        data=report,
+        data=report
     )
 
 @router.get(
@@ -35,12 +35,12 @@ async def admin_report(
     user_id, role = current_user
     if role != UserRoleEnum.ADMIN.value:
         return ReportResponse(
-            code=403,
+            error_code=403,
             message="Permission denied",
             data=None
         )
     
     report = await ReportService.get_report_data(min_date, max_date, None)
     return ReportResponse(
-        data=report,
+        data=report
     )

@@ -85,7 +85,8 @@ class AccountService:
             raise BadRequestException("Email already registered")
         _logger.info(f"User updated: {user.user_name}")
         return UserResponseData(
-            id=str(user.id),
+            id=user.id,
+            _id=user.id,
             user_name=user.user_name,
             email=user.email,
             role=user.role.value,

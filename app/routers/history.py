@@ -85,7 +85,7 @@ async def all_history(
     user_id, role = current_user
     if role != UserRoleEnum.ADMIN.value:
         return BasePaginationResponseData(
-            code=403,
+            error_code=403,
             message="Permission denied"
         )
     history_data, total = await HistoryService.get_history_data(
@@ -119,7 +119,7 @@ async def pending_approvals_history(
     user_id, role = current_user
     if role != UserRoleEnum.ADMIN.value:
         return BasePaginationResponseData(
-            code=403,
+            error_code=403,
             message="Permission denied"
         )
     history_data, total = await HistoryService.get_history_data(
@@ -199,7 +199,7 @@ async def approve(
     user_id, role = current_user
     if role != UserRoleEnum.ADMIN.value:
         return HistoryResponse(
-            code=403,
+            error_code=403,
             message="Permission denied"
         )
     history_data = await HistoryService.update_history(history_id, ApprovalEnum.Approved, user_id)
@@ -219,7 +219,7 @@ async def reject(
     user_id, role = current_user
     if role != UserRoleEnum.ADMIN.value:
         return HistoryResponse(
-            code=403,
+            error_code=403,
             message="Permission denied"
         )
     history_data = await HistoryService.update_history(history_id, ApprovalEnum.Rejected, user_id)
@@ -239,7 +239,7 @@ async def delete(
     user_id, role = current_user
     if role != UserRoleEnum.ADMIN.value:
         return BaseResponse(
-            code=403,
+            error_code=403,
             message="Permission denied"
         )
     history_data = await HistoryService.delete_history(history_id)
