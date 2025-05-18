@@ -1,7 +1,7 @@
 from fastapi import APIRouter, Depends, Query, UploadFile, File
 
 from app.dto.common import BasePaginationResponseData
-from app.dto.report_dto import HistoryResponseWithoutId
+from app.dto.report_dto import HistoryResponseWithoutId, SingleURLRequest
 from app.services.prediction_services import PredictionService
 from app.helpers.auth_helpers import get_current_user
 
@@ -12,11 +12,11 @@ router = APIRouter(tags=['Prediction'], prefix="/prediction")
     response_model=HistoryResponseWithoutId,
 )
 async def single_url(
-    url: str = Query(...),
+    request: SingleURLRequest,
     current_user: str = Depends(get_current_user),
 ):
     user_id, role = current_user
-    prediction_data = await PredictionService.get_prediction(url, user_id, role)
+    prediction_data = await PredictionService.get_prediction(request.url, user_id, role)
     return HistoryResponseWithoutId(
         data=prediction_data[0],
         message="Success",

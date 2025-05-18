@@ -4,6 +4,9 @@ from beanie import PydanticObjectId
 from pydantic import BaseModel, Field
 from app.dto.common import BaseResponseData
 
+class SingleURLRequest(BaseModel):
+    url: str
+
 class HistoryResponseDataWihtoutId(BaseModel):
     original_url: str
     detection: bool
