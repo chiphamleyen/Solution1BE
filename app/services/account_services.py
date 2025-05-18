@@ -37,7 +37,7 @@ class AccountService:
             updated_at=datetime.now(),
         )
         try:
-            await new_user.save()
+            await new_user.insert()
         except DuplicateKeyError:
             raise BadRequestException("Email already registered")
         _logger.info(f"New user created: {new_user.user_name}")
@@ -54,7 +54,7 @@ class AccountService:
             updated_at=datetime.now(),
         )
         try:
-            await new_user.save()
+            await new_user.insert()
         except DuplicateKeyError:
             raise BadRequestException("Email already registered")
         _logger.info(f"New admin created: {new_user.user_name}")
