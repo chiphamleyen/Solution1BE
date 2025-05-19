@@ -182,7 +182,9 @@ async def submit_for_approval(
     current_user: str = Depends(get_current_user),
 ):
     user_id, role = current_user
-    history_data = await HistoryService.user_submit_history(history_id, user_id)
+    history_data = await HistoryService.user_submit_history(
+        history_id=history_id, 
+        user_id=user_id)
     return HistoryResponse(
         message="Success",
         data=history_data
