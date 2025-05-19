@@ -80,7 +80,7 @@ class HistoryService:
         history = await History.find_one(History.id == PydanticObjectId(history_id))
         if history is None:
             raise NotFoundException("History not found")
-        history.approved = ApprovalEnum[approved]
+        history.approved = approved
         history.updated_at = datetime.now()
         history.approved_at = datetime.now()
         history.approved_by = admin_id

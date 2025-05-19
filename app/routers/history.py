@@ -59,7 +59,7 @@ async def approved_global_history(
         page=page, 
         size=size, 
         classifier=classifier,
-        approved_status=ApprovalEnum.Approved,
+        approved_status=ApprovalEnum.Approved.value,
         user_id=None
     )
     return BasePaginationResponseData(
@@ -128,7 +128,7 @@ async def pending_approvals_history(
         page=page,
         size=size,
         classifier=classifier,
-        approved_status=ApprovalEnum.Pending,
+        approved_status=ApprovalEnum.Pending.value,
         need_review=True,
         user_id=None
     )
