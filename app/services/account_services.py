@@ -106,6 +106,8 @@ class AccountService:
         user = await User.find_one({"_id": PydanticObjectId(user_id)})
         if not user:
             raise NotFoundException(f"User not found")
+        if user.role == UserRoleEnum.ADMIN:
+            raise PermissionDeniedException("Cannot delete admin user")
         await user.delete()
         _logger.info(f"User deleted: {user.user_name}")
         return True
