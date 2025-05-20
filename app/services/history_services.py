@@ -73,7 +73,7 @@ class HistoryService:
         history.approved = ApprovalEnum.Pending
         history.updated_at = datetime.now()
         await history.save()
-        return HistoryResponseData(**history.model_dump())
+        return HistoryResponseData(**history.model_dump(), _id=history.id)
     
     @staticmethod
     async def update_history(history_id: str, approved: ApprovalEnum, admin_id: str) -> HistoryResponseData:
@@ -85,7 +85,7 @@ class HistoryService:
         history.approved_at = datetime.now()
         history.approved_by = admin_id
         await history.save()
-        return HistoryResponseData(**history.model_dump())
+        return HistoryResponseData(**history.model_dump(), _id=history.id)
     
     @staticmethod
     async def delete_history(history_id: str) -> bool:

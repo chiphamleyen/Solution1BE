@@ -26,6 +26,7 @@ class ReportService:
         # Get aggregated data
         query_copy = query.clone()
         report_data = ReportResponseData()
+        report_data.total = await query.count()
 
         # Get detection data
         report_data.detection_benign = await query_copy.find(History.detection == False).count()
