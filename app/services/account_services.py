@@ -76,6 +76,8 @@ class AccountService:
         user = await User.find_one({"_id": PydanticObjectId(user_id)})
         if not user:
             raise NotFoundException(f"User not found")
+        if user.role == UserRoleEnum.ADMIN:
+            raise PermissionDeniedException("Admin cannot be updated")
         user.user_name = user_name
         user.email = email
         user.updated_at = datetime.now()
